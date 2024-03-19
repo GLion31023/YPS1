@@ -55,7 +55,7 @@ class Hangman:
 
         self.play_again()
 
-    def reset_game_attributes(self):
+    def reset_game(self):
         self.word = None
         self.lives = 5
         self.guessed_letters = set()
@@ -65,10 +65,10 @@ class Hangman:
         play_again = input("Fancy another game? y/n? ").lower()
         while True:
             if play_again not in ['y', 'n']:
-                print('Invalid choice.')
+                print("Invalid choice. Please answer with 'y' or 'n'")
                 continue
             if play_again == 'y':
-                self.reset_game_attributes()
+                self.reset_game()
                 self.play(new_game=False)
             return
 

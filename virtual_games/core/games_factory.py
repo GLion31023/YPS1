@@ -13,6 +13,6 @@ class GamesFactory:
         game_name = game_name.lower()
         game_class = self._games.get(game_name)
         if not game_class:
-            raise ValueError(f'Invalid game name or command: {game_name}. Please select again:')
+            raise ValueError(f'Invalid game name: {game_name}. Please try again:')
         game_instance = game_class()
         return game_instance.play()
