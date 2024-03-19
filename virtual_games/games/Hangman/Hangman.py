@@ -41,10 +41,12 @@ class Hangman:
         else:
             self.guessed_letters.add(guess)
             self.lives -= 1
+
             if self.lives == 0:
                 self.is_game_over = True
                 print(f'You lost! The word was: {self.word}')
                 return
+
             print(f"Sorry, '{guess}' is not in the word. Remaining lives: {self.lives} ")
 
         print(hide_word(self.word, new_positions))
