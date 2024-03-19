@@ -41,6 +41,16 @@ def hide_word(word, positions):
     return ''.join(word[i] if positions[i] else '-' for i in range(len(word)))
 
 
+def get_valid_guess():
+    while True:
+        guess_letter = input("Guess a letter: ").lower()
+
+        if guess_letter.isalpha() and len(guess_letter) == 1:
+            return guess_letter
+        else:
+            print('Please enter a single alphabetic character.')
+
+
 def check_guess(word, letter, positions):
     new_positions = positions.copy()
     letter = letter.lower()
