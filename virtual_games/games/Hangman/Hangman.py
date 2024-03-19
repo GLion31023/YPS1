@@ -63,10 +63,14 @@ class Hangman:
 
     def play_again(self):
         play_again = input("Fancy another game? y/n? ").lower()
-        if play_again == 'y':
-            self.reset_game_attributes()
-            self.play(new_game=False)
-        return
+        while True:
+            if play_again not in ['y', 'n']:
+                print('Invalid choice.')
+                continue
+            if play_again == 'y':
+                self.reset_game_attributes()
+                self.play(new_game=False)
+            return
 
     def __str__(self):
         return (
