@@ -1,3 +1,6 @@
+from virtual_games.games.Hangman.Hangman import Hangman
+
+
 class GamesFactory:
     _games = {}
 
@@ -16,3 +19,6 @@ class GamesFactory:
             raise ValueError(f'Invalid game name: {game_name}. Please try again:')
         game_instance = game_class()
         return game_instance.play()
+
+
+GamesFactory.register_game('Hangman', Hangman)

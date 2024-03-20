@@ -1,6 +1,5 @@
 from virtual_games.games.Hangman.helpers import (get_word, get_initial_positions, hide_word, get_valid_guess,
                                                  check_guess, check_for_win)
-from virtual_games.core.games_factory import GamesFactory
 
 
 class Hangman:
@@ -10,8 +9,8 @@ class Hangman:
         self.guessed_letters = set()
         self.is_game_over = False
 
-    def play(self, is_new_game=True):
-        self.set_up_game(is_new_game)
+    def play(self, load_game=True):
+        self.set_up_game(load_game)
         positions = get_initial_positions(len(self.word))
         print(hide_word(self.word, positions))
 
@@ -26,8 +25,8 @@ class Hangman:
 
         self.play_again()
 
-    def set_up_game(self, new_game):
-        if new_game:
+    def set_up_game(self, load_game):
+        if load_game:
             print(self)
 
         self.word = get_word()
@@ -73,7 +72,7 @@ class Hangman:
             play_again = input("Fancy another game? y/n? ").lower()
             if play_again == 'y':
                 self.reset_game()
-                self.play(is_new_game=True)
+                self.play(load_game=False)
                 break
             elif play_again == 'n':
                 break
@@ -88,6 +87,3 @@ class Hangman:
             "- You get 5 lives for words under 7 characters, and 7 lives for longer words.\n"
             "Let's start the game!"
         )
-
-
-GamesFactory.register_game('Hangman', Hangman)
