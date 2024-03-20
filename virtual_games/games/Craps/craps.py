@@ -14,6 +14,7 @@ class Craps:
         while self.game_is_active:
             if self._stack < 10:
                 decision = insufficient_funds(self._stack)
+
                 if decision == 'a':
                     self.buy_in_chips()
                 else:
@@ -27,8 +28,6 @@ class Craps:
                 else:
                     print(f"Cash out: {self._stack}")
                     self.game_is_active = False
-
-        print(f"Thanks for playing!")
 
         self.play_again()
 
@@ -54,10 +53,12 @@ class Craps:
 
     def win(self, stake) -> None:
         self._stack += stake * 2
-        print(f"Congrats, you won {stake * 2}! Available chips: {self._stack}")
+        print(f"Great! You won {stake * 2}! \nAvailable chips: {self._stack}")
 
     def lose(self) -> None:
-        print(f"You lost! Available chips: {self._stack}. Better luck next time!")
+        print(f"You lost! Better luck next time!")
+        if self._stack >= 10:
+            print(f"Available chips: {self._stack}")
 
     def place_a_bet(self) -> Optional[int | bool]:
         while True:
@@ -66,6 +67,10 @@ class Craps:
 
                 if bet_amount < 10:
                     print("The minimum bet is 10.")
+                    continue
+
+                if bet_amount % 10 != 0:
+                    print("Your stake must be a multiple of 10 (e.g., 10, 20, 30, ...).")
                     continue
 
                 if bet_amount > self._stack:
@@ -114,6 +119,7 @@ class Craps:
                 self.play(load_game=False)
                 return
             elif play_again == 'n':
+                print(f"Thanks for playing!")
                 return
             else:
                 print("Invalid choice. Continue with 'y' or 'n'")
@@ -125,6 +131,7 @@ class Craps:
             - The player loses if they roll a 2, 3, or 12 on the first roll.
             - If the player rolls any other number, the game continues until they either roll their point again,
               (in which case they win) or rolls a 7 (in which case they lose). 
-            - Minimum bet is 10. Winning bets pay out double. - Set your balance at the beginning of the game.
+            - Minimum bet is 10. Winning bets pay out double.
+            - Set your balance at the beginning of the game.
             - Good luck! Let's Play!"""
         )

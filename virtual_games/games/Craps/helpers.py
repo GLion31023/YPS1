@@ -15,14 +15,20 @@ def insufficient_funds(stack: int, method=None) -> str:
     decision = ''
     if method == 'place_a_bet':
         while decision not in {'a', 'b', 'e'}:
-            decision = input(
-                "Select 'a' -> if you want to add more chips; 'b' -> to decrease your bet or 'e' -> to exit: ").lower()
+            decision = input("Select:\n "
+                             "'a' -> if you want to add more chips;\n "
+                             "'b' -> to decrease your bet; \n "
+                             "'e' -> to exit: ").lower()
+
             if decision not in {'a', 'b', 'e'}:
                 print("Invalid selection. Continue with 'a', 'b', 'e'")
 
     else:
         while decision not in {'a', 'e'}:
-            decision = input("Select 'a' -> if you want to add more chips or 'e' -> to exit: ").lower()
+            decision = input("Select:\n "
+                             "'a' -> if you want to add more chips;\n "
+                             "'e' -> to exit: ").lower()
+
             if decision not in {'a', 'e'}:
                 print("Invalid selection. Continue with 'a', 'e'")
 
