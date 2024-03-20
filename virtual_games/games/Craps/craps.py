@@ -3,27 +3,31 @@ from virtual_games.games.Craps.helpers import roll_dice, insufficient_funds
 
 class Craps:
     def __init__(self):
+        self.game_is_active = True
         self._stack = 0
 
     def play(self, load_game=True):
         self.set_up_game(load_game)
 
-        while True:
-            if self._stack >= 10:
-                stake = self.place_a_bet()
-                if stake:
-                    self.roll_dice(stake)
-                else:
-                    print(f"Cash out: {self._stack}")
-                    break
-            else:
+        while self.game_is_active:
+            if self._stack < 10:
                 decision = insufficient_funds(self._stack)
                 if decision == 'a':
                     self.buy_in_chips()
-                elif decision == 'e':
-                    break
+                else:
+                    self.game_is_active = False
+
+            else:
+                stake = self.place_a_bet()
+
+                if not stake:
+                    print(f"Cash out: {self._stack}")
+                    self.game_is_active = False
+
+                self.roll_dice(stake)
 
         print(f"Thanks for playing!")
+
         self.play_again()
 
     def roll_dice(self, stake):
@@ -63,23 +67,20 @@ class Craps:
                     continue
 
                 if bet_amount > self._stack:
-                    decision = insufficient_funds(self._stack)
+                    decision = insufficient_funds(self._stack, method='place_a_bet')
                     if decision == 'a':
                         self.buy_in_chips()
+                    elif decision == 'b':
+                        continue
                     elif decision == 'e':
                         return False
 
                 self._stack -= bet_amount
+
                 return bet_amount
 
             except ValueError:
                 print("Please enter a valid number")
-
-    def set_up_game(self, load_game):
-        if load_game:
-            print(self)
-
-        self.buy_in_chips()
 
     def buy_in_chips(self):
         while True:
@@ -93,15 +94,22 @@ class Craps:
             except ValueError:
                 print("Please enter a valid number")
 
+    def set_up_game(self, load_game):
+        if load_game:
+            print(self)
+
+        self.buy_in_chips()
+
     def play_again(self):
         while True:
             play_again = input("Would you like to play again? y/n? ").lower()
             if play_again == 'y':
+                self.game_is_active = True
                 self._stack = 0
                 self.play(load_game=False)
-                break
+                return
             elif play_again == 'n':
-                break
+                return
             else:
                 print("Invalid choice. Continue with 'y' or 'n'")
 
