@@ -100,12 +100,15 @@ class Craps:
 
         self.buy_in_chips()
 
+    def reset_game(self):
+        self.game_is_active = True
+        self._stack = 0
+
     def play_again(self):
         while True:
             play_again = input("Would you like to play again? y/n? ").lower()
             if play_again == 'y':
-                self.game_is_active = True
-                self._stack = 0
+                self.reset_game()
                 self.play(load_game=False)
                 return
             elif play_again == 'n':
