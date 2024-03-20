@@ -20,11 +20,11 @@ class Craps:
             else:
                 stake = self.place_a_bet()
 
-                if not stake:
+                if stake:
+                    self.roll_dice(stake)
+                else:
                     print(f"Cash out: {self._stack}")
                     self.game_is_active = False
-
-                self.roll_dice(stake)
 
         print(f"Thanks for playing!")
 
@@ -63,7 +63,7 @@ class Craps:
                 bet_amount = int(input(f"Place your bet please: "))
 
                 if bet_amount < 10:
-                    print("Min bet is 10.")
+                    print("The minimum bet is 10.")
                     continue
 
                 if bet_amount > self._stack:
@@ -72,7 +72,7 @@ class Craps:
                         self.buy_in_chips()
                     elif decision == 'b':
                         continue
-                    elif decision == 'e':
+                    else:
                         return False
 
                 self._stack -= bet_amount
