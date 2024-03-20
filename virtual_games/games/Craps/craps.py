@@ -1,12 +1,14 @@
+from typing import Optional
+
 from virtual_games.games.Craps.helpers import roll_dice, insufficient_funds
 
 
 class Craps:
     def __init__(self):
-        self.game_is_active = True
-        self._stack = 0
+        self.game_is_active: bool = True
+        self._stack: int = 0
 
-    def play(self, load_game=True):
+    def play(self, load_game: bool = True) -> None:
         self.set_up_game(load_game)
 
         while self.game_is_active:
@@ -30,7 +32,7 @@ class Craps:
 
         self.play_again()
 
-    def roll_dice(self, stake):
+    def roll_dice(self, stake) -> None:
         result = roll_dice()
         if result in (7, 11):
             self.win(stake)
@@ -39,7 +41,7 @@ class Craps:
         else:
             self.roll_point(result, stake)
 
-    def roll_point(self, point, stake):
+    def roll_point(self, point, stake) -> None:
         while True:
             print(f"Rolling again..")
             new_roll = roll_dice()
@@ -50,14 +52,14 @@ class Craps:
                 self.lose()
                 break
 
-    def win(self, stake):
+    def win(self, stake) -> None:
         self._stack += stake * 2
         print(f"Congrats, you won {stake * 2}! Available chips: {self._stack}")
 
-    def lose(self):
+    def lose(self) -> None:
         print(f"You lost! Available chips: {self._stack}. Better luck next time!")
 
-    def place_a_bet(self):
+    def place_a_bet(self) -> Optional[int | bool]:
         while True:
             try:
                 bet_amount = int(input(f"Place your bet please: "))
@@ -82,7 +84,7 @@ class Craps:
             except ValueError:
                 print("Please enter a valid number")
 
-    def buy_in_chips(self):
+    def buy_in_chips(self) -> None:
         while True:
             try:
                 add_chips = int(input('Buy-in chips: '))
@@ -94,17 +96,17 @@ class Craps:
             except ValueError:
                 print("Please enter a valid number")
 
-    def set_up_game(self, load_game):
+    def set_up_game(self, load_game) -> None:
         if load_game:
             print(self)
 
         self.buy_in_chips()
 
-    def reset_game(self):
+    def reset_game(self) -> None:
         self.game_is_active = True
         self._stack = 0
 
-    def play_again(self):
+    def play_again(self) -> None:
         while True:
             play_again = input("Would you like to play again? y/n? ").lower()
             if play_again == 'y':

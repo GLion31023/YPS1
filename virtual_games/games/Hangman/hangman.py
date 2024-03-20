@@ -1,15 +1,17 @@
+from typing import Optional
+
 from virtual_games.games.Hangman.helpers import (get_word, get_initial_positions, hide_word, get_valid_guess,
                                                  check_guess, check_for_win)
 
 
 class Hangman:
     def __init__(self):
-        self._word = None
-        self._lives = 5
+        self._word: Optional[str | None] = None
+        self._lives: int = 5
         self._guessed_letters = set()
-        self._is_game_over = False
+        self._is_game_over: bool = False
 
-    def play(self, load_game=True):
+    def play(self, load_game=True) -> None:
         self.set_up_game(load_game)
         positions = get_initial_positions(len(self._word))
         print(hide_word(self._word, positions))
@@ -25,7 +27,7 @@ class Hangman:
 
         self.play_again()
 
-    def set_up_game(self, load_game):
+    def set_up_game(self, load_game) -> None:
         if load_game:
             print(self)
 
@@ -34,7 +36,7 @@ class Hangman:
         if len(self._word) >= 7:
             self._lives = 7
 
-    def handle_unsuccessful_guess(self, guess, new_positions):
+    def handle_unsuccessful_guess(self, guess, new_positions) -> None:
         if guess in self._guessed_letters:
             print(f"You have already guessed '{guess}'")
         else:
@@ -50,7 +52,7 @@ class Hangman:
 
         print(hide_word(self._word, new_positions))
 
-    def handle_successful_guess(self, guess, new_positions):
+    def handle_successful_guess(self, guess, new_positions) -> Optional[list | None]:
         if check_for_win(new_positions):
             print(f'Congratulations, you have guessed the word -> {self._word}!')
             self._is_game_over = True
@@ -61,13 +63,13 @@ class Hangman:
         positions = new_positions
         return positions
 
-    def reset_game(self):
+    def reset_game(self) -> None:
         self._word = None
         self._lives = 5
         self._guessed_letters = set()
         self._is_game_over = False
 
-    def play_again(self):
+    def play_again(self) -> None:
         while True:
             play_again = input("Would you like to play again? y/n? ").lower()
             if play_again == 'y':

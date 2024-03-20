@@ -2,7 +2,7 @@ import random
 from english_words import get_english_words_set
 
 
-def set_an_own_word():
+def set_an_own_word() -> str:
     while True:
         word = input("Please enter a secret word between 5-10 letters: ")
 
@@ -17,7 +17,7 @@ def set_an_own_word():
         return word.lower()
 
 
-def get_word():
+def get_word() -> str:
     random_words = ([w for w in get_english_words_set(['web2'], lower=True) if 5 <= len(w) <= 10])
     while True:
         type_of_play = input("Choose a mode: Select 'r' to play with a random word or 's' to set your own word: ")
@@ -33,15 +33,15 @@ def get_word():
             continue
 
 
-def get_initial_positions(length):
+def get_initial_positions(length) -> list:
     return [i == 0 or i == length - 1 for i in range(length)]
 
 
-def hide_word(word, positions):
+def hide_word(word, positions) -> str:
     return ''.join(word[i] if positions[i] else '-' for i in range(len(word)))
 
 
-def get_valid_guess():
+def get_valid_guess() -> str:
     while True:
         guess_letter = input("Guess a letter: ").lower()
 
@@ -51,7 +51,7 @@ def get_valid_guess():
             print('Please enter a single alphabetic character.')
 
 
-def check_guess(word, letter, positions):
+def check_guess(word, letter, positions) -> list:
     new_positions = positions.copy()
     letter = letter.lower()
     for let in range(len(word)):
@@ -61,7 +61,7 @@ def check_guess(word, letter, positions):
     return new_positions
 
 
-def check_for_win(positions):
+def check_for_win(positions) -> bool:
     if all(positions):
         return True
     return False
