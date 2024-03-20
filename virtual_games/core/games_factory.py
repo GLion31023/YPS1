@@ -1,4 +1,5 @@
-from virtual_games.games.Hangman.Hangman import Hangman
+from virtual_games.games.Craps.craps import Craps
+from virtual_games.games.Hangman.hangman import Hangman
 
 
 class GamesFactory:
@@ -22,3 +23,4 @@ class GamesFactory:
 
 
 GamesFactory.register_game('Hangman', Hangman)
+GamesFactory.register_game('Craps', Craps)
