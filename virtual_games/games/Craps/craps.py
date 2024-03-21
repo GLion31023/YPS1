@@ -90,7 +90,7 @@ class Craps(Game):
             except ValueError:
                 print("Please enter a valid number")
 
-    def buy_in_chips(self) -> None:
+    def buy_in_chips(self) -> None:  # Need additional check if buy_in + stack >= bet
         while True:
             try:
                 add_chips = int(input('Buy-in chips: '))
@@ -111,19 +111,6 @@ class Craps(Game):
     def reset_game(self) -> None:
         self._game_is_active = True
         self._stack = 0
-
-    def play_again(self) -> None:
-        while True:
-            play_again = input("Would you like to play again? y/n? ").lower()
-            if play_again == 'y':
-                self.reset_game()
-                self.play(load_game=False)
-                return
-            elif play_again == 'n':
-                print(f"Thanks for playing!")
-                return
-            else:
-                print("Invalid choice. Continue with 'y' or 'n'")
 
     def __str__(self):
         return (

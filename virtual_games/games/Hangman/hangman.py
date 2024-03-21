@@ -70,18 +70,6 @@ class Hangman(Game):
         self._guessed_letters = set()
         self._game_is_active = True
 
-    def play_again(self) -> None:
-        while True:
-            play_again = input("Would you like to play again? y/n? ").lower()
-            if play_again == 'y':
-                self.reset_game()
-                self.play(load_game=False)
-                break
-            elif play_again == 'n':
-                break
-            else:
-                print("Invalid choice. Continue with 'y' or 'n'")
-
     def __str__(self):
         return (
             "Welcome to Hangman! Try to guess the word before you run out of lives.\n"
