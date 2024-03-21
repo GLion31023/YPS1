@@ -1,24 +1,25 @@
 from typing import Optional
 
+from virtual_games.games.game import Game
 from virtual_games.games.Craps.helpers import roll_dice, insufficient_funds
 
 
-class Craps:
+class Craps(Game):
     def __init__(self):
-        self.game_is_active: bool = True
+        super().__init__()
         self._stack: int = 0
 
     def play(self, load_game: bool = True) -> None:
         self.set_up_game(load_game)
 
-        while self.game_is_active:
+        while self._game_is_active:
             if self._stack < 10:
                 decision = insufficient_funds(self._stack)
 
                 if decision == 'a':
                     self.buy_in_chips()
                 else:
-                    self.game_is_active = False
+                    self._game_is_active = False
 
             else:
                 stake = self.place_a_bet()
@@ -27,7 +28,7 @@ class Craps:
                     self.roll_dice(stake)
                 else:
                     print(f"Cash out: {self._stack}")
-                    self.game_is_active = False
+                    self._game_is_active = False
 
         self.play_again()
 
@@ -108,7 +109,7 @@ class Craps:
         self.buy_in_chips()
 
     def reset_game(self) -> None:
-        self.game_is_active = True
+        self._game_is_active = True
         self._stack = 0
 
     def play_again(self) -> None:

@@ -1,22 +1,23 @@
 from typing import Optional
 
+from virtual_games.games.game import Game
 from virtual_games.games.Hangman.helpers import (get_word, get_initial_positions, hide_word, get_valid_guess,
                                                  check_guess, check_for_win)
 
 
-class Hangman:
+class Hangman(Game):
     def __init__(self):
+        super().__init__()
         self._word: Optional[str | None] = None
         self._lives: int = 5
         self._guessed_letters = set()
-        self._is_game_over: bool = False
 
     def play(self, load_game: bool = True) -> None:
         self.set_up_game(load_game)
         positions = get_initial_positions(len(self._word))
         print(hide_word(self._word, positions))
 
-        while not self._is_game_over:
+        while self._game_is_active:
             guess = get_valid_guess()
             new_positions = check_guess(self._word, guess, positions)
 
@@ -44,7 +45,7 @@ class Hangman:
             self._lives -= 1
 
             if self._lives == 0:
-                self._is_game_over = True
+                self._game_is_active = False
                 print(f'You lost! The word was: {self._word}')
                 return
 
@@ -55,7 +56,7 @@ class Hangman:
     def handle_successful_guess(self, guess: str, new_positions: list[bool]) -> Optional[list | None]:
         if check_for_win(new_positions):
             print(f'Congratulations, you have guessed the word -> {self._word}!')
-            self._is_game_over = True
+            self._game_is_active = False
             return
         print('Good guess!')
         self._guessed_letters.add(guess)
@@ -67,7 +68,7 @@ class Hangman:
         self._word = None
         self._lives = 5
         self._guessed_letters = set()
-        self._is_game_over = False
+        self._game_is_active = True
 
     def play_again(self) -> None:
         while True:

@@ -13,7 +13,7 @@ class GamesFactory:
     def get_games():
         return list(GamesFactory._games.keys())
 
-    def play(self, game_name):
+    def play(self, game_name: str):
         game_name = game_name.lower()
         game_class = self._games.get(game_name)
         if not game_class:
