@@ -31,7 +31,7 @@ class Craps:
 
         self.play_again()
 
-    def roll_dice(self, stake) -> None:
+    def roll_dice(self, stake: int) -> None:
         result = roll_dice()
         if result in (7, 11):
             self.win(stake)
@@ -40,7 +40,7 @@ class Craps:
         else:
             self.roll_point(result, stake)
 
-    def roll_point(self, point, stake) -> None:
+    def roll_point(self, point: int, stake: int) -> None:
         while True:
             print(f"Rolling again..")
             new_roll = roll_dice()
@@ -51,7 +51,7 @@ class Craps:
                 self.lose()
                 break
 
-    def win(self, stake) -> None:
+    def win(self, stake: int) -> None:
         self._stack += stake * 2
         print(f"Great! You won {stake * 2}! \nAvailable chips: {self._stack}")
 
@@ -101,7 +101,7 @@ class Craps:
             except ValueError:
                 print("Please enter a valid number")
 
-    def set_up_game(self, load_game) -> None:
+    def set_up_game(self, load_game: bool) -> None:
         if load_game:
             print(self)
 

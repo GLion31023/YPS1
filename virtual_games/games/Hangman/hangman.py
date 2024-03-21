@@ -11,7 +11,7 @@ class Hangman:
         self._guessed_letters = set()
         self._is_game_over: bool = False
 
-    def play(self, load_game=True) -> None:
+    def play(self, load_game: bool = True) -> None:
         self.set_up_game(load_game)
         positions = get_initial_positions(len(self._word))
         print(hide_word(self._word, positions))
@@ -27,7 +27,7 @@ class Hangman:
 
         self.play_again()
 
-    def set_up_game(self, load_game) -> None:
+    def set_up_game(self, load_game: bool) -> None:
         if load_game:
             print(self)
 
@@ -36,7 +36,7 @@ class Hangman:
         if len(self._word) >= 7:
             self._lives = 7
 
-    def handle_unsuccessful_guess(self, guess, new_positions) -> None:
+    def handle_unsuccessful_guess(self, guess: str, new_positions: list[bool]) -> None:
         if guess in self._guessed_letters:
             print(f"You have already guessed '{guess}'")
         else:
@@ -52,7 +52,7 @@ class Hangman:
 
         print(hide_word(self._word, new_positions))
 
-    def handle_successful_guess(self, guess, new_positions) -> Optional[list | None]:
+    def handle_successful_guess(self, guess: str, new_positions: list[bool]) -> Optional[list | None]:
         if check_for_win(new_positions):
             print(f'Congratulations, you have guessed the word -> {self._word}!')
             self._is_game_over = True

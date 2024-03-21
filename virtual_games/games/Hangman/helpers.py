@@ -33,11 +33,11 @@ def get_word() -> str:
             continue
 
 
-def get_initial_positions(length) -> list:
+def get_initial_positions(length: int) -> list:
     return [i == 0 or i == length - 1 for i in range(length)]
 
 
-def hide_word(word, positions) -> str:
+def hide_word(word: str, positions: list[bool]) -> str:
     return ''.join(word[i] if positions[i] else '-' for i in range(len(word)))
 
 
@@ -51,7 +51,7 @@ def get_valid_guess() -> str:
             print('Please enter a single alphabetic character.')
 
 
-def check_guess(word, letter, positions) -> list:
+def check_guess(word: str, letter: str, positions: list[bool]) -> list:
     new_positions = positions.copy()
     letter = letter.lower()
     for let in range(len(word)):
@@ -61,7 +61,7 @@ def check_guess(word, letter, positions) -> list:
     return new_positions
 
 
-def check_for_win(positions) -> bool:
+def check_for_win(positions: list[bool]) -> bool:
     if all(positions):
         return True
     return False
