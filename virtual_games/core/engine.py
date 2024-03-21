@@ -4,9 +4,9 @@ from virtual_games.core.games_factory import GamesFactory
 class Engine:
     def __init__(self, factory: GamesFactory):
         self._games_factory = factory
-        print('Welcome to Virtual Games!')
 
     def start(self):
+        print('Welcome to Virtual Games!')
         while True:
             games = self._games_factory.get_games()
             game_list = ', '.join(game.capitalize() for game in games)
