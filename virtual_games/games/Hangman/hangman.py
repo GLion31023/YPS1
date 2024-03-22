@@ -8,7 +8,7 @@ from virtual_games.games.Hangman.helpers import (get_word, get_initial_positions
 class Hangman(Game):
     def __init__(self):
         super().__init__()
-        self._word: Optional[str | None] = None
+        self._word: Optional[str] = None
         self._lives: int = 5
         self._guessed_letters = set()
 
