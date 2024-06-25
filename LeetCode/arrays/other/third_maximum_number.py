@@ -5,17 +5,18 @@
 
 
 def third_max(nums: list[int]) -> int:
-    m1 = m2 = m3 = float('-inf')
+    m1 = nums[0]
+    m2 = m3 = float('-inf')
 
-    for n in nums:
-        if n in {m1, m2, m3}:
+    for i in range(1, len(nums)):
+        if nums[i] in {m1, m2, m3}:
             continue
-        if n > m1:
-            m3, m2, m1 = m2, m1, n
-        elif m1 > n > m2:
-            m3, m2 = m2, n
-        elif m2 > n > m3:
-            m3 = n
+        if nums[i] > m1:
+            m3, m2, m1 = m2, m1, nums[i]
+        elif m1 > nums[i] > m2:
+            m3, m2 = m2, nums[i]
+        elif m2 > nums[i] > m3:
+            m3 = nums[i]
 
     return m3 if m3 != float('-inf') else m1
 
