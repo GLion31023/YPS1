@@ -11,5 +11,4 @@ def check_if_exist(nums: list[int]) -> bool:
 
 
 print(check_if_exist([10, 2, 5, 3]))
-
 print(check_if_exist([7, 1, 14, 11]))
