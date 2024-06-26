@@ -6,21 +6,20 @@
 # After sorting, it becomes [0,1,9,16,100].
 
 def sorted_squares(nums: list[int]) -> list[int]:
-    result = [0] * len(nums)
-    left, right = 0, len(nums) - 1
-    add_next = len(nums) - 1
+    squares = [0] * len(nums)
+    l, r = 0, len(nums) - 1
+    p = len(squares) - 1
 
-    while left <= right:
-        if nums[left] * nums[left] > nums[right] * nums[right]:
-            result[add_next] = (nums[left] * nums[left])
-            left += 1
+    while l <= r:
+        if nums[l] * nums[l] > nums[r] * nums[r]:
+            squares[p] = nums[l] * nums[l]
+            l += 1
         else:
-            result[add_next] = (nums[right] * nums[right])
-            right -= 1
+            squares[p] = nums[r] * nums[r]
+            r -= 1
+        p -= 1
 
-        add_next -= 1
-
-    return result
+    return squares
 
     # squared_nums = [n * n for n in nums]
     # return sorted(squared_nums)

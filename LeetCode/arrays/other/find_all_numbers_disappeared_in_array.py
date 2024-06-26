@@ -7,8 +7,6 @@ def find_disappeared_numbers(nums: list[int]) -> list[int]:
 
     return missing_numbers
 
-    # Approach using set
-
     # unique = set(nums)
     # missing_numbers = [n for n in range(1, len(nums) + 1) if n not in unique]
 
