@@ -11,6 +11,12 @@ Welcome to my personal project space! This repository serves as a showcase of th
 - **Hangman**: Test your vocabulary and guess the hidden words to save the day.
 - **Craps**: Dive into the world of dice games with Craps, where luck and strategy meet.
 
+### Task-Board
+**Description**: Manage tasks and issues efficiently. Add tasks, log activities, track changes with statuses, assign tasks to users, and more.
+
+### Educational Worm
+**Description**: Practice file manipulation and script self-replication, offering a glimpse into cybersecurity.
+
 ### Coming Soon
 This space is ever-evolving, with new projects on the horizon. Stay tuned for more games, applications, and utilities that will be added in the future.
 
