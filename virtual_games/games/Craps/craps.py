@@ -90,7 +90,7 @@ class Craps(Game):
             except ValueError:
                 print("Please enter a valid number")
 
-    def buy_in_chips(self) -> None:  # Need additional check if buy_in + stack >= bet
+    def buy_in_chips(self) -> None:
         while True:
             try:
                 add_chips = int(input('Buy-in chips: '))
